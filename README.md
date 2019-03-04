@@ -1,6 +1,8 @@
 # SmsView
 Custom view for sms code input with customization</br></br>
-<img src="https://github.com/VRGsoftUA/SmsView/blob/master/preview.gif" width="270" height="480" align="center"/>
+<p align="center">
+    <img src="https://github.com/VRGsoftUA/SmsView/blob/master/preview.gif" width="270" height="480" />
+</p>
 
 
 # Usage
