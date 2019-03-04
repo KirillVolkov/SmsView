@@ -239,13 +239,19 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
     }
 
     private void initTextWatchers() {
-        for (int i = START_INDEX; i < START_INDEX + mSmsLength - 1; i++) {
+        for (int i = START_INDEX; i < START_INDEX + mSmsLength; i++) {
             final int id = i;
             mDigits.get(i).addTextChangedListener(new TextWatcherAdapter() {
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
                     if (!TextUtils.isEmpty(charSequence)) {
-                        mDigits.get(id + 1).requestFocus();
+                        if (mDigits.get(id + 1) != null) {
+                            mDigits.get(id + 1).requestFocus();
+                        } else {
+                            if (mSubmitListener != null) {
+                                mSubmitListener.onSubmit(getText());
+                            }
+                        }
                     }
                 }
             });
