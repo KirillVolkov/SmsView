@@ -7,17 +7,19 @@
     tools:context="net.vrgsoft.smscodeview.MainActivity">
 
     <net.vrgsoft.smsview.SmsCodeView
+        android:id="@+id/smsCodeView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
-        android:textSize="33sp"
         android:gravity="center"
-        app:onSubmit="onSubmit"
-        app:itemWidth="40dp"
-        app:itemHeight="67dp"
+        android:textSize="24sp"
         app:itemBackground="@drawable/sms_digit_bg"
+        app:itemHeight="67dp"
         app:itemTextColor="#757575"
         app:itemTextCursorDrawable="@drawable/edit_cursor"
+        app:itemWidth="40dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:smsLength="6" />
+        app:onSubmit="onSubmit"
+        app:smsLength="6"
+        app:toolsText="2323" />
 </android.support.constraint.ConstraintLayout>

@@ -1,9 +1,11 @@
 package net.vrgsoft.smsview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -11,6 +13,7 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -49,6 +52,9 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
     private int mItemTextColor;
     private int mItemTextSize;
     private int mDigitGravity;
+    private Typeface mFont = null;
+
+    private String mToolsText = null;
 
     public SmsCodeView(Context context) {
         this(context, null);
@@ -81,6 +87,10 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
         initTextWatchers();
         initKeyListeners();
 
+        if (mToolsText != null) {
+            setText(mToolsText);
+        }
+
         mDigits.get(START_INDEX + mSmsLength - 1).setOnEditorActionListener(this);
     }
 
@@ -105,6 +115,13 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
             mItemTextCursorDrawableRes = a.getResourceId(R.styleable.SmsCodeView_itemTextCursorDrawable, 0);
             mItemTextColor = a.getColor(R.styleable.SmsCodeView_itemTextColor, Color.BLACK);
             mDigitGravity = a.getInt(R.styleable.SmsCodeView_android_gravity, Gravity.CENTER);
+
+            mToolsText = a.getString(R.styleable.SmsCodeView_toolsText);
+
+            int resourceId = a.getResourceId(R.styleable.SmsCodeView_itemFont, 0);
+            if (resourceId != 0) {
+                mFont = ResourcesCompat.getFont(context, resourceId);
+            }
 
             a.recycle();
         }
@@ -132,6 +149,9 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
             configureEditText(editText);
             editText.setLayoutParams(params);
             addView(editText);
+            if (mFont != null) {
+                editText.setTypeface(mFont);
+            }
         } else {
             for (int i = START_INDEX; i < START_INDEX + mSmsLength; i++) {
                 EditText editText = mDigits.get(i);
@@ -161,6 +181,9 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
 
                 editText.setLayoutParams(params);
                 addView(editText);
+                if (mFont != null) {
+                    editText.setTypeface(mFont);
+                }
             }
         }
     }
@@ -188,6 +211,15 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void setText(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            if (i < mSmsLength) {
+                char c = text.charAt(i);
+                mDigits.get(i + START_INDEX).setText(String.valueOf(c));
+            }
         }
     }
 
@@ -219,6 +251,7 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
         }
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
         if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) return false;
@@ -322,8 +355,9 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
 
     /**
      * Sets the listener for keyboard ACTION_DONE event on the last digit
-     * @see OnSubmitListener
+     *
      * @param submitListener
+     * @see OnSubmitListener
      */
     public void setOnSubmitListener(OnSubmitListener submitListener) {
         this.mSubmitListener = submitListener;
@@ -331,6 +365,7 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
 
     /**
      * Sets sms length (number of digits in sms). Possible values: from 1 to 8
+     *
      * @param smsLength
      */
     public void setSmsLength(@IntRange(from = 1, to = 8) int smsLength) {
@@ -348,6 +383,7 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
 
     /**
      * Sets the size for one digit input view
+     *
      * @param itemWidth
      * @param itemHeight
      */
@@ -361,6 +397,7 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
 
     /**
      * Sets the item background for input views
+     *
      * @param itemBackground
      */
     public void setItemBackground(Drawable itemBackground) {
@@ -372,6 +409,7 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
 
     /**
      * Sets the cursor drawable for input views
+     *
      * @param itemTextCursorDrawableRes
      */
     public void setItemTextCursorDrawableRes(@DrawableRes int itemTextCursorDrawableRes) {
@@ -384,6 +422,7 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
 
     /**
      * Sets the text color for input views
+     *
      * @param itemTextColor
      */
     public void setItemTextColor(@ColorInt int itemTextColor) {
@@ -396,6 +435,7 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
 
     /**
      * Sets the text size for input views
+     *
      * @param itemTextSize
      */
     public void setItemTextSize(int itemTextSize) {
@@ -408,6 +448,7 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
 
     /**
      * Sets the text gravity for input views
+     *
      * @param gravity
      */
     public void setDigitGravity(int gravity) {

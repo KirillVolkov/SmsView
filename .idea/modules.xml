@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SmsView.iml" filepath="$PROJECT_DIR$/.idea/SmsView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmsView.iml" filepath="$PROJECT_DIR$/SmsView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smsview/smsview.iml" filepath="$PROJECT_DIR$/smsview/smsview.iml" />
     </modules>
   </component>
 </project>
