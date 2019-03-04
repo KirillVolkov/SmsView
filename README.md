@@ -34,6 +34,8 @@ dependencies {
         app:itemHeight="67dp"
         app:itemBackground="@drawable/sms_digit_bg"
         app:itemTextColor="#757575"
+        app:toolsText="234214"
+        app:itemFont="@font/simplefont"
         app:itemTextCursorDrawable="@drawable/edit_cursor"
         app:layout_constraintTop_toTopOf="parent"
         app:smsLength="6" />
@@ -50,6 +52,8 @@ dependencies {
 | app:itemTextColor | Sets text color for one digit field |
 | android:gravity | Sets text alignment for one digit field |
 | android:textSize | Sets text size for one digit field |
+| app:itemFont | Sets text font for one digit field |
+| app:toolsText | Sets initial text for view |
 | app:onSubmit | Sets a listener for ACTION_DONE event on the last digit (data binding method references is also applicable) |
 
 | Method  | Description |
