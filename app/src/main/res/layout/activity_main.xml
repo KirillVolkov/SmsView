@@ -6,6 +6,25 @@
     android:layout_height="match_parent"
     tools:context="net.vrgsoft.smscodeview.MainActivity">
 
+    <Button
+        android:id="@+id/btn_set_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_clear_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_set_text" />
+
     <net.vrgsoft.smsview.SmsCodeView
         android:id="@+id/smsCodeView"
         android:layout_width="match_parent"

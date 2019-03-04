@@ -214,13 +214,20 @@ public class SmsCodeView extends ConstraintLayout implements View.OnKeyListener,
         }
     }
 
-    private void setText(String text) {
+    public void setText(String text) {
         for (int i = 0; i < text.length(); i++) {
             if (i < mSmsLength) {
                 char c = text.charAt(i);
                 mDigits.get(i + START_INDEX).setText(String.valueOf(c));
             }
         }
+    }
+
+    public void clear() {
+        for (int i = 0; i < mSmsLength; i++) {
+            mDigits.get(i + START_INDEX).setText("");
+        }
+        mDigits.get(START_INDEX).requestFocus();
     }
 
     public String getText() {

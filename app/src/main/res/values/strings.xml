@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SmsCodeView</string>
+    <string name="set_text">Set Text</string>
+    <string name="clear_text">Clear text</string>
 </resources>
