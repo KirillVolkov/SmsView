@@ -1,8 +1,6 @@
-#### [HIRE US](http://vrgsoft.net/)
-
 # SmsView
 Custom view for sms code input with customization</br></br>
-<img src="https://github.com/VRGsoftUA/SmsView/blob/master/preview.gif" width="270" height="480" />
+<img src="https://github.com/VRGsoftUA/SmsView/blob/master/preview.gif" width="270" height="480" align="center"/>
 
 
 # Usage
@@ -18,7 +16,7 @@ allprojects {
 }
 
 dependencies {
-    compile 'com.github.VRGsoftUA:SmsView:1.0'
+    compile 'com.github.KirillVolkov:SmsView:1.4'
 }
 ```
 2. Include SmsCodeView class in your xml layout. For Example:
